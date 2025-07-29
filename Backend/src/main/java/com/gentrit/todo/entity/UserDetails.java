@@ -29,4 +29,7 @@ public class UserDetails {
     @Column(nullable = false)
     private Gender sex;
 
+    @OneToOne(mappedBy = "details")
+    private User user;
+
 }

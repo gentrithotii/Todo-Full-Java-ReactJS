@@ -24,11 +24,14 @@ public class User {
     private String password;
 
     @OneToOne
-    @JoinColumn(name = "details_id", nullable = false)
+    @JoinColumn( nullable = false)
     private UserDetails details;
 
-    @Setter(AccessLevel.NONE)
+    @OneToMany
+    @JoinColumn(name = "user_id")
     private List<Todo> todos;
+
+
 
 
 

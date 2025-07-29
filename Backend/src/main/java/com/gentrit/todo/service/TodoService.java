@@ -1,4 +1,5 @@
 package com.gentrit.todo.service;
 
-public interface TodoService {
+public interface TodoService{
+
 }

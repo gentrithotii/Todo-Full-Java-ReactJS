@@ -1,11 +1,15 @@
 package com.gentrit.todo.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
 public class Todo {
@@ -26,8 +30,6 @@ public class Todo {
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    public Todo() {
-    }
 
     public Todo(String title, String description, LocalDateTime dueDate) {
         setTitle(title);
