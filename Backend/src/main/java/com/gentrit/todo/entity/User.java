@@ -3,6 +3,7 @@ package com.gentrit.todo.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -23,16 +24,20 @@ public class User {
     @Column(length = 50, nullable = false)
     private String password;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn( nullable = false)
     private UserDetails details;
 
     @OneToMany
     @JoinColumn(name = "user_id")
-    private List<Todo> todos;
+    private List<Todo> todos = new ArrayList<>();
 
 
-
+public User(String userName, String password, UserDetails details){
+    setUserName(userName);
+    setPassword(password);
+    setDetails(details);
+}
 
 
 }

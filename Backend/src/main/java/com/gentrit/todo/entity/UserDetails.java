@@ -27,9 +27,17 @@ public class UserDetails {
     private String email;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Gender sex;
 
     @OneToOne(mappedBy = "details")
     private User user;
+
+    public UserDetails(String firstName, String lastName, String email, Gender sex){
+        setFirstName(firstName);
+        setLastName(lastName);
+        setEmail(email);
+        setSex(sex);
+    }
 
 }
