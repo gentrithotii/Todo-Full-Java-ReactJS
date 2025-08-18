@@ -1,6 +1,5 @@
 package com.gentrit.todo.config;
 
-import com.gentrit.todo.service.UserService;
 import com.gentrit.todo.service.impl.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +28,7 @@ public class SecurityConfig {
     public SecurityFilterChain SecurityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> {
-                            authorize.requestMatchers("api/login","api/signup","api/user").permitAll()
+                            authorize.requestMatchers("/api/login","/api/signup","/api/user").permitAll()
                             .anyRequest().authenticated();
                         }
                 )

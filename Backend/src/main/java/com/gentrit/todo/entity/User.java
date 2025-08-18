@@ -21,7 +21,7 @@ public class User {
 
     @Column(length = 50, nullable = false, unique = true, updatable = false)
     private String userName;
-    @Column(length = 50, nullable = false)
+    @Column(nullable = false)
     private String password;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -20,7 +20,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping(value = "user")
+    @PostMapping(value = "signup")
     public ResponseEntity<UserRegisterDTO> registerUser(@RequestBody UserRegisterDTO requestUser) {
 
        UserRegisterDTO savedUser =  userService.registerUser(requestUser).orElseThrow(() -> new RuntimeException("User could not regsiter"));
