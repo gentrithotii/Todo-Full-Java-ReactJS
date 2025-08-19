@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface UserService {
     Optional<UserRegisterDTO> registerUser(UserRegisterDTO user);
     List<UserRegisterDTO> getAllUsers();
+    Optional<User> findByUserNameContains(String username);
     boolean deleteUser(UserRegisterDTO user);
     Optional<UserRegisterDTO> updateUser(UserRegisterDTO user);
 }

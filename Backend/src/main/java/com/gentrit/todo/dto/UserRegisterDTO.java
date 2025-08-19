@@ -7,12 +7,12 @@ import lombok.Setter;
 @Setter
 
 public class UserRegisterDTO {
-    private String userName;
+    private String username;
     private String password;
     private UserDetailsDTO userDetailsDTO;
 
-    public UserRegisterDTO(String userName, String password, UserDetailsDTO userDetailsDTO) {
-    setUserName(userName);
+    public UserRegisterDTO(String username, String password, UserDetailsDTO userDetailsDTO) {
+    setUsername(username);
     setPassword(password);
     setUserDetailsDTO(userDetailsDTO);
     }

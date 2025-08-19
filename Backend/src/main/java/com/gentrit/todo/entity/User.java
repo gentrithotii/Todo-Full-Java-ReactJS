@@ -20,7 +20,7 @@ public class User {
     private long id;
 
     @Column(length = 50, nullable = false, unique = true, updatable = false)
-    private String userName;
+    private String username;
     @Column(nullable = false)
     private String password;
 
@@ -33,8 +33,8 @@ public class User {
     private List<Todo> todos = new ArrayList<>();
 
 
-public User(String userName, String password, UserDetails details){
-    setUserName(userName);
+public User(String username, String password, UserDetails details){
+    setUsername(username);
     setPassword(password);
     setDetails(details);
 }

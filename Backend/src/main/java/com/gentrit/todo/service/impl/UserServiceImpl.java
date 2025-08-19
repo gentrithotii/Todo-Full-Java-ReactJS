@@ -6,8 +6,6 @@ import com.gentrit.todo.entity.UserDetails;
 import com.gentrit.todo.repository.UserRepository;
 import com.gentrit.todo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +16,7 @@ import java.util.Optional;
 import static org.springframework.security.core.userdetails.User.withUsername;
 
 @Service
-public class UserServiceImpl implements UserService , UserDetailsService {
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder getBcryptPasswordEncoder;
 
@@ -32,7 +30,7 @@ public class UserServiceImpl implements UserService , UserDetailsService {
     @Override
     public Optional<UserRegisterDTO> registerUser(UserRegisterDTO userDTO) {
         UserDetails details = new UserDetails(userDTO.getUserDetailsDTO().getFirstName(), userDTO.getUserDetailsDTO().getLastName(), userDTO.getUserDetailsDTO().getEmail(), userDTO.getUserDetailsDTO().getSex());
-        User user = new User(userDTO.getUserName(), getBcryptPasswordEncoder.encode(userDTO.getPassword()), details);
+        User user = new User(userDTO.getUsername(), getBcryptPasswordEncoder.encode(userDTO.getPassword()), details);
 
 
         userRepository.save(user);
@@ -46,6 +44,12 @@ public class UserServiceImpl implements UserService , UserDetailsService {
     }
 
     @Override
+    public Optional<User> findByUserNameContains(String username) {
+        User user = userRepository.findUserByUsernameContainsIgnoreCase(username).orElseThrow(null);
+        return  Optional.of(user);
+    }
+
+    @Override
     public boolean deleteUser(UserRegisterDTO user) {
         return false;
     }
@@ -56,11 +60,4 @@ public class UserServiceImpl implements UserService , UserDetailsService {
     }
 
 
-    @Override
-    public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findUserByUserNameContainsIgnoreCase(username).orElseThrow(() ->  new UsernameNotFoundException("User not found with this email" +  username));
-
-        //Todo Implement roles admin and user and so on
-        return withUsername(user.getUserName()).password(user.getPassword()).build();
-    }
 }
